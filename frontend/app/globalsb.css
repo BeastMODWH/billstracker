@@ -1,0 +1,366 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: #0f172a;
+    --color-surface: #1e293b;
+    --color-surface-2: #263348;
+    --color-border: #334155;
+    --color-accent: #38bdf8;
+    --color-accent-dim: #0ea5e9;
+    --color-text: #f1f5f9;
+    --color-muted: #94a3b8;
+    --color-success: #34d399;
+    --color-warning: #fbbf24;
+    --color-danger: #f87171;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #475569; }
+}
+
+@layer components {
+  .card {
+    @apply bg-slate-800/60 border border-slate-700/50 rounded-2xl backdrop-blur-sm;
+  }
+  .card-hover {
+    @apply card transition-all duration-200 hover:border-sky-500/40 hover:bg-slate-800/80 hover:shadow-lg hover:shadow-sky-900/20;
+  }
+  .btn-primary {
+    @apply bg-sky-500 hover:bg-sky-400 text-white font-medium px-4 py-2.5 rounded-xl transition-all duration-150 active:scale-95 flex items-center gap-2 text-sm;
+  }
+  .btn-secondary {
+    @apply bg-slate-700 hover:bg-slate-600 text-slate-100 font-medium px-4 py-2.5 rounded-xl transition-all duration-150 active:scale-95 flex items-center gap-2 text-sm;
+  }
+  .btn-ghost {
+    @apply hover:bg-slate-700/60 text-slate-300 hover:text-slate-100 font-medium px-3 py-2 rounded-xl transition-all duration-150 flex items-center gap-2 text-sm;
+  }
+  .btn-danger {
+    @apply bg-red-500/20 hover:bg-red-500/30 text-red-400 hover:text-red-300 border border-red-500/30 font-medium px-4 py-2.5 rounded-xl transition-all duration-150 flex items-center gap-2 text-sm;
+  }
+  .input {
+    @apply w-full bg-slate-900/60 border border-slate-700 text-slate-100 rounded-xl px-4 py-2.5 text-sm placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:border-sky-500/50 transition-all;
+  }
+  .label {
+    @apply block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wide;
+  }
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  .stat-card {
+    @apply card p-5 flex flex-col gap-1;
+  }
+  .page-title {
+    @apply text-2xl font-bold text-slate-100 tracking-tight;
+  }
+  .section-title {
+    @apply text-sm font-semibold text-slate-400 uppercase tracking-widest;
+  }
+}
+
+@keyframes highlight-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); border-color: rgba(56,189,248,0.8); }
+  40%  { box-shadow: 0 0 0 8px rgba(56, 189, 248, 0); border-color: rgba(56,189,248,0.8); }
+  60%  { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.5); border-color: rgba(56,189,248,0.6); }
+  80%  { box-shadow: 0 0 0 6px rgba(56, 189, 248, 0); border-color: rgba(56,189,248,0.8); }
+  100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); border-color: rgba(56,189,248,0.4); }
+}
+
+.highlight-pulse {
+  animation: highlight-pulse 1.5s ease-out 2;
+  border-color: rgba(56,189,248,0.4) !important;
+}
+
+/* ============================================
+   LIGHT MODE — Full redesign
+   ============================================ */
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+[data-theme="light"] body {
+  background: #f0f4f8;
+  color: #1a202c;
+}
+
+/* Cards */
+[data-theme="light"] .card {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+[data-theme="light"] .card-hover {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+[data-theme="light"] .card-hover:hover {
+  border-color: #0ea5e9;
+  box-shadow: 0 4px 12px rgba(14,165,233,0.12);
+  background: #ffffff;
+}
+
+[data-theme="light"] .stat-card {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+/* Inputs */
+[data-theme="light"] .input {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #1a202c;
+}
+
+[data-theme="light"] .input:focus {
+  background: #ffffff;
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.1);
+}
+
+[data-theme="light"] .input::placeholder {
+  color: #94a3b8;
+}
+
+[data-theme="light"] select.input option {
+  background: #ffffff;
+  color: #1a202c;
+}
+
+/* Buttons */
+[data-theme="light"] .btn-secondary {
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #e2e8f0;
+}
+
+[data-theme="light"] .btn-secondary:hover {
+  background: #e2e8f0;
+  color: #1a202c;
+}
+
+[data-theme="light"] .btn-ghost {
+  color: #475569;
+}
+
+[data-theme="light"] .btn-ghost:hover {
+  background: #f1f5f9;
+  color: #1a202c;
+}
+
+[data-theme="light"] .btn-danger {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+
+[data-theme="light"] .btn-danger:hover {
+  background: #fecaca;
+}
+
+/* Navigation */
+[data-theme="light"] aside {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 1px 0 8px rgba(0,0,0,0.06);
+}
+
+[data-theme="light"] nav.fixed {
+  background: rgba(255,255,255,0.95) !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 -1px 8px rgba(0,0,0,0.06);
+}
+
+/* Text colors */
+[data-theme="light"] .text-slate-100 { color: #0f172a !important; }
+[data-theme="light"] .text-slate-200 { color: #1e293b !important; }
+[data-theme="light"] .text-slate-300 { color: #334155 !important; }
+[data-theme="light"] .text-slate-400 { color: #64748b !important; }
+[data-theme="light"] .text-slate-500 { color: #94a3b8 !important; }
+[data-theme="light"] .text-slate-600 { color: #cbd5e1 !important; }
+
+/* Backgrounds */
+[data-theme="light"] .bg-slate-950 { background: #f0f4f8 !important; }
+[data-theme="light"] .bg-slate-900\/80 { background: rgba(255,255,255,0.95) !important; }
+[data-theme="light"] .bg-slate-900\/60 { background: rgba(248,250,252,0.9) !important; }
+[data-theme="light"] .bg-slate-900 { background: #ffffff !important; }
+[data-theme="light"] .bg-slate-800\/60 { background: rgba(255,255,255,0.9) !important; }
+[data-theme="light"] .bg-slate-800 { background: #f8fafc !important; }
+[data-theme="light"] .bg-slate-700\/60 { background: rgba(241,245,249,0.8) !important; }
+[data-theme="light"] .bg-slate-700\/40 { background: rgba(241,245,249,0.7) !important; }
+[data-theme="light"] .bg-slate-700\/30 { background: rgba(241,245,249,0.5) !important; }
+[data-theme="light"] .bg-slate-700 { background: #e2e8f0 !important; }
+
+/* Borders */
+[data-theme="light"] .border-slate-700\/50 { border-color: #e2e8f0 !important; }
+[data-theme="light"] .border-slate-700\/40 { border-color: #e2e8f0 !important; }
+[data-theme="light"] .border-slate-700 { border-color: #cbd5e1 !important; }
+[data-theme="light"] .border-slate-600 { border-color: #cbd5e1 !important; }
+
+/* Sidebar nav links */
+[data-theme="light"] aside a.text-slate-400 { color: #475569 !important; }
+[data-theme="light"] aside a:hover { 
+  color: #0f172a !important; 
+  background: #f1f5f9 !important; 
+}
+[data-theme="light"] aside a.text-sky-400 { color: #0ea5e9 !important; }
+[data-theme="light"] aside a.bg-sky-500\/15 { background: #e0f2fe !important; }
+[data-theme="light"] aside a.border-sky-500\/20 { border-color: #bae6fd !important; }
+
+/* Labels */
+[data-theme="light"] .label { color: #475569 !important; }
+[data-theme="light"] .section-title { color: #64748b !important; }
+
+/* Modals */
+[data-theme="light"] .fixed.inset-0 > div:last-child {
+  background: #ffffff;
+  border-color: #e2e8f0;
+}
+
+/* Badges */
+[data-theme="light"] .badge { color: inherit; }
+
+/* Code blocks */
+[data-theme="light"] code {
+  background: #f1f5f9;
+  color: #0ea5e9;
+}
+
+/* Scrollbar */
+[data-theme="light"] ::-webkit-scrollbar-track { background: #f1f5f9; }
+[data-theme="light"] ::-webkit-scrollbar-thumb { background: #cbd5e1; }
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* PIN lock screen in light mode */
+[data-theme="light"] .fixed.inset-0.bg-slate-950 {
+  background: #f0f4f8 !important;
+}
+
+[data-theme="light"] .fixed.inset-0.bg-slate-950 button {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  color: #1a202c;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+[data-theme="light"] .fixed.inset-0.bg-slate-950 button:hover {
+  background: #f1f5f9;
+}
+
+
+/* ============================================
+   MOBILE OPTIMISATIONS
+   ============================================ */
+
+/* Prevent text size adjustment on iOS */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Better touch targets */
+button, a, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Smooth momentum scrolling on iOS */
+.overflow-y-auto, .overflow-y-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Safe area utilities */
+.pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+.pt-safe { padding-top: env(safe-area-inset-top); }
+
+/* Modal backdrop on mobile - full screen */
+@media (max-width: 640px) {
+  /* Modals slide up from bottom as sheets */
+  .modal-sheet {
+    border-radius: 20px 20px 0 0 !important;
+    max-height: 92dvh !important;
+  }
+
+  /* Wider tap targets on mobile */
+  .btn-primary, .btn-secondary, .btn-ghost, .btn-danger {
+    min-height: 44px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  /* Full width buttons in modals on mobile */
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  /* Better input sizing on mobile */
+  .input {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+    min-height: 44px;
+  }
+
+  select.input {
+    font-size: 16px !important;
+  }
+
+  /* Stat cards - 2 col on small screens */
+  .stat-grid-mobile {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Tablet optimisations */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .input {
+    font-size: 15px;
+  }
+}
+
+/* Fix iOS safari bottom bar overlap */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .fixed-bottom-nav {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 0.5rem);
+  }
+}
+
+/* Active states for touch */
+@media (hover: none) {
+  .card-hover:active {
+    border-color: rgba(56,189,248,0.4);
+    background: rgba(30,41,59,0.9);
+  }
+
+  .btn-primary:active { background: #0284c7; }
+  .btn-secondary:active { background: #475569; }
+}
+
+/* Light mode mobile fixes */
+[data-theme="light"] .input {
+  background: #ffffff !important;
+}
+
+[data-theme="light"] select.input option {
+  background: #ffffff;
+  color: #1a202c;
+}
+
+
+

@@ -1,0 +1,21 @@
+{
+  "name": "BillsTracker",
+  "short_name": "BillsTracker",
+  "icons": [
+    {
+      "src": "/public/favicon.svg/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/public/favicon.svg/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#8fc5f5",
+  "background_color": "#114c8a",
+  "display": "standalone"
+}

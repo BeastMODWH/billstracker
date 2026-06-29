@@ -1,0 +1,62 @@
+[
+  {
+    "name": "billers",
+    "type": "base",
+    "fields": [
+      {"name": "name", "type": "text", "required": true},
+      {"name": "category", "type": "select", "options": {"values": ["Water","Council Tax","Energy","Internet","Insurance","Mobile","TV License","Other"]}},
+      {"name": "account_number", "type": "text"},
+      {"name": "contact_info", "type": "text"},
+      {"name": "notes", "type": "text"},
+      {"name": "vulnerability_flag", "type": "bool", "default": false},
+      {"name": "color", "type": "text"}
+    ]
+  },
+  {
+    "name": "bills",
+    "type": "base",
+    "fields": [
+      {"name": "biller_id", "type": "relation", "required": true, "options": {"collectionId": "billers", "cascadeDelete": true}},
+      {"name": "current_balance", "type": "number"},
+      {"name": "last_bill_date", "type": "date"},
+      {"name": "next_bill_date", "type": "date"},
+      {"name": "last_bill_amount", "type": "number"},
+      {"name": "notes", "type": "text"}
+    ]
+  },
+  {
+    "name": "payments",
+    "type": "base",
+    "fields": [
+      {"name": "bill_id", "type": "relation", "required": true, "options": {"collectionId": "bills", "cascadeDelete": true}},
+      {"name": "amount", "type": "number", "required": true},
+      {"name": "payment_date", "type": "date", "required": true},
+      {"name": "method", "type": "select", "options": {"values": ["Direct Debit","Bank Transfer","Card","Cash","Other"]}},
+      {"name": "notes", "type": "text"}
+    ]
+  },
+  {
+    "name": "direct_debits",
+    "type": "base",
+    "fields": [
+      {"name": "bill_id", "type": "relation", "required": true, "options": {"collectionId": "bills", "cascadeDelete": true}},
+      {"name": "amount", "type": "number", "required": true},
+      {"name": "collection_day", "type": "number"},
+      {"name": "next_dd_date", "type": "date"},
+      {"name": "status", "type": "select", "options": {"values": ["Active","Paused","Cancelled"]}},
+      {"name": "notes", "type": "text"}
+    ]
+  },
+  {
+    "name": "reminders",
+    "type": "base",
+    "fields": [
+      {"name": "bill_id", "type": "relation", "required": true, "options": {"collectionId": "bills", "cascadeDelete": true}},
+      {"name": "reminder_date", "type": "date", "required": true},
+      {"name": "type", "type": "select", "options": {"values": ["Payment Due","Follow Up","Review","Custom"]}},
+      {"name": "message", "type": "text"},
+      {"name": "status", "type": "select", "options": {"values": ["Pending","Snoozed","Done"]}},
+      {"name": "snoozed_until", "type": "date"}
+    ]
+  }
+]

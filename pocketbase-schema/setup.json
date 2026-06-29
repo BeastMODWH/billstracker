@@ -1,0 +1,64 @@
+{
+  "collections": [
+    {
+      "name": "billers",
+      "type": "base",
+      "schema": [
+        { "name": "name", "type": "text", "required": true },
+        { "name": "category", "type": "select", "options": { "values": ["Water","Council Tax","Energy","Internet","Insurance","Mobile","TV Licence","Other"] } },
+        { "name": "account_number", "type": "text" },
+        { "name": "contact_info", "type": "text" },
+        { "name": "notes", "type": "text" },
+        { "name": "vulnerability_flag", "type": "bool" },
+        { "name": "is_active", "type": "bool" }
+      ]
+    },
+    {
+      "name": "bills",
+      "type": "base",
+      "schema": [
+        { "name": "biller_id", "type": "relation", "options": { "collectionId": "billers", "cascadeDelete": true } },
+        { "name": "current_balance", "type": "number" },
+        { "name": "last_bill_date", "type": "date" },
+        { "name": "last_bill_amount", "type": "number" },
+        { "name": "next_bill_date", "type": "date" },
+        { "name": "notes", "type": "text" }
+      ]
+    },
+    {
+      "name": "payments",
+      "type": "base",
+      "schema": [
+        { "name": "bill_id", "type": "relation", "options": { "collectionId": "bills" } },
+        { "name": "biller_id", "type": "relation", "options": { "collectionId": "billers" } },
+        { "name": "amount", "type": "number", "required": true },
+        { "name": "payment_date", "type": "date", "required": true },
+        { "name": "method", "type": "select", "options": { "values": ["Direct Debit","Bank Transfer","Card","Cash","Standing Order","Other"] } },
+        { "name": "notes", "type": "text" }
+      ]
+    },
+    {
+      "name": "direct_debits",
+      "type": "base",
+      "schema": [
+        { "name": "biller_id", "type": "relation", "options": { "collectionId": "billers" } },
+        { "name": "amount", "type": "number" },
+        { "name": "collection_day", "type": "number" },
+        { "name": "next_dd_date", "type": "date" },
+        { "name": "status", "type": "select", "options": { "values": ["active","paused","cancelled"] } },
+        { "name": "notes", "type": "text" }
+      ]
+    },
+    {
+      "name": "reminders",
+      "type": "base",
+      "schema": [
+        { "name": "biller_id", "type": "relation", "options": { "collectionId": "billers" } },
+        { "name": "reminder_date", "type": "date" },
+        { "name": "type", "type": "select", "options": { "values": ["payment_due","follow_up","review","custom"] } },
+        { "name": "message", "type": "text" },
+        { "name": "status", "type": "select", "options": { "values": ["pending","snoozed","done"] } }
+      ]
+    }
+  ]
+}
